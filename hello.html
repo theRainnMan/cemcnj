@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#video-show').dataTable({
+                "bProcessing": true,
+                "sAjaxSource": "hello.php",
+                "aoColumns": [
+                    { mData: 'PASTOR' },
+                    { mData: 'TITLE'},
+                    { mData: 'DESCRIPTION' },
+                    { mData: 'FILE',
+                        mRender: function (data){
+                            return '<a href="' + data + '">'+ data +'</a>';
+                        }
+                    },
+                    { mData: 'DATE_P' }
+                ]
+            });
+        });
+    </script>
+    <title>CEMCNJ sermon recordings</title>
+</head>
+
+<body>
+<td colspan="4" align="center"><h2>Sermon Recordings 講道錄音</h2></td>
+<!--<div>-->
+    <!--<label>Search Recordings:</label>-->
+    <!--<input type="search" id="site-search">-->
+    <!--<button>Search</button>-->
+<!--</div>-->
+<table class="main" width=864 id="video-show">
+    <thead>
+        <tr>
+            <th>PASTOR</th>
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>FILE</th>
+            <th>DATE_P</th>
+        </tr>
+    </thead>
+</table>
+
+</body>
+</html>
