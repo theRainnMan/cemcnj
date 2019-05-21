@@ -18,12 +18,12 @@ $dbname = 'cemcnj_audios';
   
   //printf("Initial character set: %s\n", $dblink->character_set_name());
 
-	if (!$dblink->set_charset("utf8")) {
-		//printf("Error loading character set utf8: %s\n", $dblink->error);
-		exit();
-	} else {
-		//printf("Current character set: %s\n", $dblink->character_set_name());
-	}
+  if (!$dblink->set_charset("utf8")) {
+    //printf("Error loading character set utf8: %s\n", $dblink->error);
+    exit();
+  } else {
+    //printf("Current character set: %s\n", $dblink->character_set_name());
+  }
 
 //Fetch 3 rows from actor table
   $result = $dblink->query("SELECT * FROM audio_info_t");
@@ -33,14 +33,14 @@ $dbname = 'cemcnj_audios';
 
 //Fetch into associative array
   while($row = $result->fetch_assoc()) {
-	 $dbdata[]=$row;
+   $dbdata[]=$row;
   }
 
-  $results = ["sEcho" => 1,
-      "iTotalRecords" => count($dbdata),
-      "iTotalDisplayRecords" => count($dbdata),
-      "aaData" => $dbdata];
+  $results = ["draw" => 1,
+      "recordsTotal" => count($dbdata),
+      "recordsFiltered" => count($dbdata),
+      "data" => $dbdata];
 
 //Print array in JSON format
-	echo json_encode($results);
+  echo json_encode($results);
 ?>
