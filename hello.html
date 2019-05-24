@@ -4,17 +4,34 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 
-    <script type="text/javascript">
+    <script>
         $(document).ready(function() {
-            console.log("dsdsds")
-            var dt = $('#video-show').DataTable({
+            console.log("dsdsds");
+            $('#video-show').DataTable({
                 "processing": true,
-                "serverSide": true,
-                'ajax': "recordings.php"
+                "ordering": true,
+                "responsive": true,
+                "order": [[ 4, "desc" ]],
+                "ajax": {
+                    "url": "recordings.php"
+                },
+                "columns": [
+                    { "data": 'PASTOR' },
+                    { "data": 'TITLE' },
+                    { "data": 'DESCRIPTION' },
+                    { "data": 'FILE',
+                      "render": function (data, type, row, meta) {
+                        return '<a href="'+'../'+data+'">Play</a>'
+                      }
+                    },
+                    { "data": 'DATE_P' }
+                ],
             });
-            console.log(dt)
         });
     </script>
     <title>CEMCNJ sermon recordings</title>
@@ -27,7 +44,7 @@
     <!--<input type="search" id="site-search">-->
     <!--<button>Search</button>-->
 <!--</div>-->
-<table class="display" style="width:80% id="video-show">
+<table class="table table-striped table-bordered" style="width:100%" id="video-show">
     <thead>
         <tr>
             <th>PASTOR</th>
